@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'uuid'
+        'name', 'email', 'password', 'type', 'uuid', 'confirmed', 'raffleNumber'
     ];
 
     /**
@@ -81,5 +81,9 @@ class User extends Authenticatable
 
     public function profile_photo_url(){
         return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=fff&background=9b012a';
+    }
+
+    public function file(){
+        return $this->hasOne(File::class);
     }
 }

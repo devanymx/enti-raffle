@@ -10,14 +10,12 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <span class="isolate inline-flex rounded-md shadow-sm">
-                      <a href="{{route('dashboard', ['score' => 'excellent', 'filter' => true])}}"
-                              class="inline-flex items-center rounded-l-md border border-gray-300 bg-emerald-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"> Excelente </a>
-                      <a href="{{route('dashboard', ['score' => 'regular', 'filter' => true])}}"
-                              class="inline-flex items-center border border-gray-300 bg-amber-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"> Regular </a>
-                      <a href="{{route('dashboard', ['score' => 'bad', 'filter' => true])}}"
-                              class="inline-flex items-center rounded-r-md border border-gray-300 bg-red-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">Mal</a>
-                        <a href="{{route('dashboard', ['score' => 'done', 'filter' => true])}}"
-                           class="inline-flex items-center rounded-r-md border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">Resueltos</a>
+                      <a href="{{route('dashboard', ['score' => 'penal', 'filter' => true])}}"
+                              class="inline-flex items-center rounded-l-md border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"> Penal </a>
+                      <a href="{{route('dashboard', ['score' => 'civil', 'filter' => true])}}"
+                              class="inline-flex items-center border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"> Civil </a>
+                        <a href="{{route('dashboard', ['score' => 'none', 'filter' => true])}}"
+                           class="inline-flex items-center rounded-r-md border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-secondary hover:text-white focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"> No registrados </a>
                     </span>
                     <div class="inline-flex rounded-md shadow-sm mr-5">
                         <div class="mt-1">
@@ -120,11 +118,9 @@
                             @endif
                         @endforeach
                     </ul>
-                    @if(!$filters)
-                        <div class="p-6 sm:px-20 mt-6 pb-10 bg-white border-b border-gray-200">
-                            {!! $users->links() !!}
-                        </div>
-                    @endif
+                    <div class="p-6 sm:px-20 mt-6 pb-10 bg-white border-b border-gray-200">
+                        {!! $users->links() !!}
+                    </div>
                 </div>
 
             </div>

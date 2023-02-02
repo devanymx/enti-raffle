@@ -19,6 +19,9 @@
                         <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                             Administración
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('user.register') }}" :active="request()->routeIs('users.confirm')">
+                            Registros
+                        </x-jet-nav-link>
                     @endif
                 </div>
             </div>

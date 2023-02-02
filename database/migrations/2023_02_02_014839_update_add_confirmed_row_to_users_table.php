@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('uusers', function (Blueprint $table) {
-            $table->id();
-            $table->string('email');
-            $table->boolean('test')->default(false);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('confirmed')->default(false);
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uusers');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('confirmed');
+        });
     }
 };

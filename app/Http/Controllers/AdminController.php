@@ -24,7 +24,7 @@ class AdminController extends Controller
         if (!$token) return redirect()->route('forbidden');
 
         $team = Team::find(1);
-        $users = $team->users()->paginate(4);
+        $users = $team->users()->where('confirmed','1')->paginate(4);
 
         //Check if the table has filters
         $filters = false;
@@ -41,6 +41,25 @@ class AdminController extends Controller
             'filters' => $filters
         ]);
 
+    }
+
+    public function addConfirmed(){
+        return view('confirm',[
+            'message' => ""
+        ]);
+    }
+
+    public function confirmUser(Request $request){
+        $input = $request->all();
+        $code = $input['code'];
+
+        $user = User::where('email',$code)->first();
+        $user->confirmed = true;
+        $user->save();
+
+        return view('confirm',[
+            'message' => "{$user->email} se ha registrado éxitosamente."
+        ]);
     }
 
     public function checkPermissions($permission){
@@ -67,41 +86,30 @@ class AdminController extends Controller
     }
 
     private function filterScore($users, $filterKey, $request){
-        $filteredUsers = new Collection();
-        foreach ($users as $user){
-            if ($user->exam){
-                if ($request->query($filterKey) == 'excellent'){
-                    if ($user->exam->score >= 80){
-                        $filteredUsers[] = $user;
-                    }
-                }
-                if ($request->query($filterKey) == 'regular'){
-                    if ($user->exam->score >= 60 && $user->exam->score <= 79){
-                        $filteredUsers[] = $user;
-                    }
-                }
-                if ($request->query($filterKey) == 'bad'){
-                    if ($user->exam->score >= 0 && $user->exam->score <= 59){
-                        $filteredUsers[] = $user;
-                    }
-                }
-                if ($request->query($filterKey) == 'done'){
-                    if ($user->exam->score > 0){
-                        $filteredUsers[] = $user;
-                    }
-                }
-            }
+        $team = Team::find(1);
+
+        if ($request->query($filterKey) == 'civil'){
+            $data = $team->users()->where('type',1)->where('confirmed',true)->paginate(5);
         }
-        return $filteredUsers;
+        if ($request->query($filterKey) == 'penal'){
+            $data = $team->users()->where('type',2)->where('confirmed',true)->paginate(5);
+        }
+        if ($request->query($filterKey) == 'none'){
+            $data = $team->users()->where('confirmed',false)->paginate(5);
+        }
+
+
+
+        return $data;
     }
 
     private function filterText($users, $filterKey, $request){
+        $team = Team::find(1);
 
-        $filteredEmail = $users->where('email', $request->query($filterKey));
+        $filteredEmail = $team->users()->where('email',$request->query($filterKey))->paginate(5);
         if (count($filteredEmail) > 0) return $filteredEmail;
-
-        $filteredName = $users->where('name', $request->query($filterKey));
-        if (count($filteredName) > 0) return $filteredName;
+        $filteredName = $team->users()->where('name',$request->query($filterKey))->paginate(5);
+        if (count($filteredName) > 0) return $filteredEmail;
 
         return [];
 

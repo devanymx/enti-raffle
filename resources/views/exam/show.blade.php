@@ -23,13 +23,17 @@
 
                     </div>
                     <div class="flex justify-center mt-8 text-xl font-bold">
-                        Tu número es:
+                        Tu número de expediente es:
+                    </div>
+                    <div class="flex justify-center pt-8 pb-0 text-2xl font-extrabold text-secondary">
+                        <span id="winner-name"></span>
+                        <span id="winner-code"></span>
+                    </div>
+                    <div class="flex justify-center pt-0 pb-10 text-2xl font-extrabold text-secondary">
+                        <span id="winner-text"></span>
                     </div>
                     <div class="flex justify-center mt-8 text-xl font-bold">
-                        1
-                    </div>
-                    <div class="flex justify-center mt-8 text-xl font-bold">
-                        <a  href=""
+                        <a  href="{{route('exam.download', ['uuid'=>'c025432e-e590-4afd-a808-d6d143ebe55f'])}}" id="download"
                             class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Descargar constancia</a>
                     </div>
                 </div>
@@ -37,3 +41,56 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        document.getElementById("download").style.display="none";
+        for (let ran = 0; ran < 4; ran++) {
+            document.getElementById("winner-name").textContent=".";
+            document.getElementById("winner-text").textContent="Cargando Tombola";
+            await new Promise(r => setTimeout(r, 500));
+            document.getElementById("winner-name").textContent="..";
+            document.getElementById("winner-text").textContent="Cargando Tombola";
+            await new Promise(r => setTimeout(r, 500));
+            document.getElementById("winner-name").textContent="...";
+            document.getElementById("winner-text").textContent="Cargando Tombola";
+            await new Promise(r => setTimeout(r, 500));
+        }
+        document.getElementById("winner-text").textContent="";
+        for (let ran = 0; ran < 30; ran++) {
+            let code = randomCode(6);
+            let name = randomName(16);
+            document.getElementById("winner-name").textContent=name;
+            document.getElementById("winner-code").textContent=code;
+
+            await new Promise(r => setTimeout(r, 100));
+        }
+        await new Promise(r => setTimeout(r, 500));
+        document.getElementById("winner-name").textContent="";
+        document.getElementById("winner-code").textContent="{{$code}}";
+        document.getElementById("download").style.display="block";
+    });
+    function randomName(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            if (i === 5 || i === 10){
+                result += ' ';
+            }else{
+                result += characters.charAt(Math.floor(Math.random() *
+                    charactersLength));
+            }
+        }
+        return result;
+    }
+    function randomCode(length) {
+        var result           = '';
+        var characters       = '*+-/';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+</script>

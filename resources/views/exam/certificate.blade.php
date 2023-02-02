@@ -29,23 +29,13 @@
         </div>
     </div>
     <div class="w-100" style="padding-top:13rem; margin-left: 50px; padding-right:30px!important;  ">
-        Por este medio se certifica que el usuario {{$user->name}} concretó <br>su: <b>Examen de oposición para Juez de primera instancia</b>
+        Por este medio se certifica que: <br>
+        El usuario: <b>___________________________</b> <br>
+        Con número de registro: <b>___________________________</b> <br>
+        Obtuvo por sorteo el expendiente número: <b>___________________________</b>
     </div>
     <div class="w-100" style="padding-top:.3rem; margin-left: 50px;  ">
-        @php
-            \Carbon\Carbon::setUTF8(true);
-            \Carbon\Carbon::setLocale(config('app.locale'));
-            setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
-                    $date = new \Carbon\Carbon($exam->finished_at);
-                    $formatedDate = $date->isoFormat('MMMM Do YYYY, h:mm:ss a');
-        @endphp
-        Con fecha de finalización en: {{$formatedDate}}
-    </div>
-    <div class="w-100" style="padding-top:.3rem; margin-left: 50px;  ">
-        Teniendo una duración de resolución de: {{$exam->time}}
-    </div>
-    <div class="w-100" style="padding-top:.3rem; margin-left: 50px;  ">
-        Calificación total: {{$exam->score}} / 100
+        Con fecha de sorteo en: <b>___________________________</b>
     </div>
     <div style="display: flex; padding-bottom: 10rem; padding-left: 50px;">
         <div class="w-50" style="padding-top:15rem; float: left;">
