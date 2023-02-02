@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{Auth::user()->name}} - Examen de oposición para Juez de primera instancia
+            {{Auth::user()->name}} - Sorteo de caso
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="flex justify-center pt-8 pb-10 text-2xl font-extrabold text-secondary">
-                        Examen de oposición para Juez de primera instancia
+                        Titulo del evento
                     </div>
                     <div class="flex justify-center text-xl font-extrabold">
                         ¡Bienvenido {{Auth::user()->name}}!
@@ -23,17 +23,14 @@
 
                     </div>
                     <div class="flex justify-center mt-8 text-xl font-bold">
-                        Recuerda que solamente tienes 180 minutos para contestar.
+                        Tu número es:
                     </div>
-                    <div class="flex justify-center pb-8 text-2xl font-extrabold">
-                        ¡Una vez empezado, no hay vuelta atrás!
+                    <div class="flex justify-center mt-8 text-xl font-bold">
+                        1
                     </div>
-                    <div class="flex justify-center mt-5">
-                        <form action="{{route('exam.start')}}" method="post">
-                            @csrf
-                            <input type="submit"
-                                    class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" value="Iniciar">
-                        </form>
+                    <div class="flex justify-center mt-8 text-xl font-bold">
+                        <a  href=""
+                            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Descargar constancia</a>
                     </div>
                 </div>
             </div>

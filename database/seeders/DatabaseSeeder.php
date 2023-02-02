@@ -25,5 +25,13 @@ class DatabaseSeeder extends Seeder
         $user->current_team_id = $team->id;
         $user->save();
 
+
+        $user = User::factory()->create(['email' => 'admin@gmail.com', 'type'=>'2']);
+        $user->current_team_id = $team->id;
+        $user->teams()->attach($team);
+        $user->save();
+
+
+
     }
 }
